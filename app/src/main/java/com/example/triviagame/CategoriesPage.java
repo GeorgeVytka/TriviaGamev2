@@ -2,6 +2,7 @@ package com.example.triviagame;
 
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,8 @@ public class CategoriesPage extends AppCompatActivity {
 
     private Button btn_Continue, btn_BackHome, btn_UserInfo, btn_RandomQuestion;
 
+    private ConstraintLayout layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,8 @@ public class CategoriesPage extends AppCompatActivity {
         //show question randomly
         startRandomQuestion();
 
+        HeaderClass headerClassInstance = new HeaderClass();
+        headerClassInstance.setBackground(layout, getApplicationContext());
 
     }
 
@@ -180,19 +185,20 @@ public class CategoriesPage extends AppCompatActivity {
 
     //this method will be called to assign buttons and text to variable
     private void assignValues(){
-        textCategory1 = (TextView)findViewById(R.id.tvCategory1);
-        textCategory2 = (TextView)findViewById(R.id.tvCategory2);
-        textCategory3 = (TextView)findViewById(R.id.tvCategory3);
-        textCategory4 = (TextView)findViewById(R.id.tvCategory4);
-        textCategory5 = (TextView)findViewById(R.id.tvCategory5);
-        textCategory6 = (TextView)findViewById(R.id.tvCategory6);
-        textCategory7 = (TextView)findViewById(R.id.tvCategory7);
-        btn_Continue = (Button)findViewById(R.id.btnContinue);
-        btn_BackHome = (Button)findViewById(R.id.btnBackToHome);
-        btn_UserInfo = (Button)findViewById(R.id.btnUserInfo);
-        btn_BackHome = (Button)findViewById(R.id.btnBackToHome);
-        btn_UserInfo = (Button)findViewById(R.id.btnUserInfo);
-        btn_RandomQuestion = (Button)findViewById(R.id.btnRandomQuestion);
+        textCategory1 = findViewById(R.id.tvCategory1);
+        textCategory2 = findViewById(R.id.tvCategory2);
+        textCategory3 = findViewById(R.id.tvCategory3);
+        textCategory4 = findViewById(R.id.tvCategory4);
+        textCategory5 = findViewById(R.id.tvCategory5);
+        textCategory6 = findViewById(R.id.tvCategory6);
+        textCategory7 = findViewById(R.id.tvCategory7);
+        btn_Continue = findViewById(R.id.btnContinue);
+        btn_BackHome = findViewById(R.id.btnBackToHome);
+        btn_UserInfo = findViewById(R.id.btnUserInfo);
+        btn_BackHome = findViewById(R.id.btnBackToHome);
+        btn_UserInfo = findViewById(R.id.btnUserInfo);
+        btn_RandomQuestion = findViewById(R.id.btnRandomQuestion);
+        layout = findViewById(R.id.constraintLayout);
 
     }
 

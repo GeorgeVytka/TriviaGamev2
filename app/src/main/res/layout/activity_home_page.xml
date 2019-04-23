@@ -52,7 +52,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="cursive"
-        android:text="Trivia Game"
         android:textColor="#096164"
         android:textSize="60sp"
         android:textStyle="bold"
