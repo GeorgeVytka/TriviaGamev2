@@ -48,6 +48,12 @@
             android:textColor="#096164"
             android:textStyle="bold"/>
 
+        <ProgressBar
+            android:id="@+id/progressBarPopMenu"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/btnSignOut"
             android:layout_width="250dp"
