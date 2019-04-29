@@ -44,7 +44,7 @@ public class PopUpWindow extends Activity {
     private TextView userHighscoreText;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    private boolean userFirestoreCheck;
+    private boolean userFirestoreCheck = true;
     private DocumentSnapshot mLastQueriedDocument;
 
     /*
@@ -87,14 +87,18 @@ public class PopUpWindow extends Activity {
 
             checkIfUserExistsInFireStore();
 
+
+
             //if user exits
             if(userFirestoreCheck == true){
+
             addUserToFireStore();
-                Log.d(TAG,"added user to database");
+               Log.d(TAG,"added user to database");
 
             }else{
+               //Log.d(TAG,"display ");
               updateUI();
-                Log.d(TAG,"display ");
+            Log.d(TAG,"display ");
 
             }
 
@@ -118,17 +122,21 @@ public class PopUpWindow extends Activity {
         CollectionReference userRef = db.collection("TriviaUser");
 
 
-        Query userQuery = userRef.whereEqualTo("user_id",FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query userQuery = userRef.whereEqualTo("userID",mUser.getUid());
 
         userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
 
                     for(QueryDocumentSnapshot document: task.getResult()){
+
+                        Log.d("Test", "Document ID: " + document.getId());
                         userClass user = document.toObject(userClass.class);
                         superupdateUI(user);
-                    }
+                       // Log.d(TAG,"display 3");
+                   }
                 }else{
 
                 }
@@ -140,7 +148,7 @@ public class PopUpWindow extends Activity {
 
     //query and finds the document according to values
     public void checkIfUserExistsInFireStore(){
-        final boolean[] temp = new boolean[1];
+
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference yourCollRef = rootRef.collection("TriviaUser");
@@ -153,24 +161,23 @@ public class PopUpWindow extends Activity {
                 if (task.isSuccessful()) {
 
 
-                        Log.d(TAG,"yo1");
-                        Log.d(TAG,"yo2");
-
                        userFirestoreCheck = true;
+                    updateUI();
+
 
                 } else {
-                    Log.d(TAG,"yo3");
+
                     Log.d(TAG, "Error getting documents: ", task.getException());
                     userFirestoreCheck = false;
                 }
-                Log.d(TAG,"yo3");
+
 
             }
 
 
         });
 
-        Log.d(TAG,"yo4");
+
     }
 
 
@@ -193,6 +200,7 @@ public class PopUpWindow extends Activity {
     * */
 
     public void addUserToFireStore(){
+        Log.d(TAG, "added user1");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         DocumentReference newUserRef = db.collection("TriviaUser").document();
@@ -210,6 +218,7 @@ public class PopUpWindow extends Activity {
                 if(task.isSuccessful()){
 
                     Log.d(TAG, "added user");
+                    updateUI();
 
                 }else{
 
