@@ -108,7 +108,7 @@ public class PopUpWindow extends Activity {
         CollectionReference userRef = db.collection("TriviaUser");
 
 
-        Query userQuery = userRef.whereEqualTo("email",mUser.getEmail());
+        Query userQuery = userRef.whereEqualTo("uid",mUser.getUid());
         Log.d("Test1", "Document ID: ");
         userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
