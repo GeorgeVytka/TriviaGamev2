@@ -44,7 +44,7 @@ public class PopUpWindow extends Activity {
     private TextView userHighscoreText;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    private boolean userFirestoreCheck = true;
+    private boolean userFirestoreCheck;
     private DocumentSnapshot mLastQueriedDocument;
 
     /*
@@ -82,27 +82,13 @@ public class PopUpWindow extends Activity {
 
 
         //check if user exits
-        if(mAuth.getUid() != null){
+        if(mAuth.getUid() != null) {
 
 
-            checkIfUserExistsInFireStore();
+            updateUI();
 
 
-
-            //if user exits
-            if(userFirestoreCheck == true){
-
-            addUserToFireStore();
-               Log.d(TAG,"added user to database");
-
-            }else{
-               //Log.d(TAG,"display ");
-              updateUI();
-            Log.d(TAG,"display ");
-
-            }
-
-        }else{
+        } else{
             Log.d(TAG,"error");
         }
 
@@ -122,8 +108,8 @@ public class PopUpWindow extends Activity {
         CollectionReference userRef = db.collection("TriviaUser");
 
 
-        Query userQuery = userRef.whereEqualTo("userID",mUser.getUid());
-
+        Query userQuery = userRef.whereEqualTo("email",mUser.getEmail());
+        Log.d("Test1", "Document ID: ");
         userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
             @Override
@@ -145,30 +131,66 @@ public class PopUpWindow extends Activity {
     }
 
 
+/*
+* .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+
+                    for(QueryDocumentSnapshot document: task.getResult()){
+
+                        Log.d("Test", "Document ID: " + document.getId());
+                        userClass user = document.toObject(userClass.class);
+                        superupdateUI(user);
+                       // Log.d(TAG,"display 3");
+                   }
+                }else{
+
+                }
+            }
+        });
+*
+* */
     //query and finds the document according to values
     public void checkIfUserExistsInFireStore(){
-
-
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-        CollectionReference yourCollRef = rootRef.collection("TriviaUser");
-        Query query = yourCollRef.whereEqualTo("userID", mUser.getUid());
-
+        CollectionReference yourCollRef = rootRef.collection("yourCollection");
+        Query query = yourCollRef.whereEqualTo("yourPropery", "yourValue");
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+    }
+
+
+    /*
+    * query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                 if (task.isSuccessful()) {
 
+                    Log.d(TAG, "get user " + mAuth.getUid() + " "+ mUser.getUid());
 
-                       userFirestoreCheck = true;
+                    //updateUI();
                     updateUI();
 
 
                 } else {
+                    Log.d(TAG, "Error getting documents: " + mAuth.getUid() + " "+ mUser.getUid());
+                    addUserToFireStore();
+                    //Log.d(TAG, "Error getting documents: ", task.getException());
 
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                    userFirestoreCheck = false;
                 }
 
 
@@ -176,26 +198,6 @@ public class PopUpWindow extends Activity {
 
 
         });
-
-
-    }
-
-
-    /*
-    * if (task.isSuccessful()) {
-
-
-                        Log.d(TAG,"yo1");
-                        Log.d(TAG,"yo2");
-
-                       userFirestoreCheck = true;
-
-                } else {
-                    Log.d(TAG,"yo3");
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                    userFirestoreCheck = false;
-                }
-            }
     *
     * */
 
@@ -218,7 +220,7 @@ public class PopUpWindow extends Activity {
                 if(task.isSuccessful()){
 
                     Log.d(TAG, "added user");
-                    updateUI();
+                    //updateUI();
 
                 }else{
 

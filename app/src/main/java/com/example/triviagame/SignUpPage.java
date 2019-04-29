@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.auth.AuthResult;
 //import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseUser;
@@ -95,6 +97,35 @@ public class SignUpPage extends AppCompatActivity {
 //update the ui or send user to different activity
 
     public void updateUI(FirebaseUser user){
+
+            Log.d(TAG, "added user1");
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference newUserRef = db.collection("TriviaUser").document();
+            userClass mUser = new userClass();
+
+
+            mUser.setEmail(user.getEmail());
+            mUser.setUserID(user.getUid());
+            mUser.setCoin("0");
+            mUser.setHighScore(0);
+
+            newUserRef.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+
+                        Log.d(TAG, "added user");
+                        //updateUI();
+
+                    }else{
+
+                        Log.d(TAG,"error adding user");
+                    }
+                }
+            });
+
+
 
         // startActivity(new Intent(LoginActivity.this, CreateAccount.class));
 
