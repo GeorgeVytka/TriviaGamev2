@@ -107,8 +107,9 @@ public class SignUpPage extends AppCompatActivity {
 
             mUser.setEmail(user.getEmail());
             mUser.setUserID(user.getUid());
-            mUser.setCoin("0");
+            mUser.setCoin(0);
             mUser.setHighScore(0);
+
 
             newUserRef.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

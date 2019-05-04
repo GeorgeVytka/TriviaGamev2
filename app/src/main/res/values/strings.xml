@@ -15,5 +15,6 @@
     </string>
 
     <string name="background">com.example.triviagame.background</string>
+    <string name="title_activity_end_page">EndPage</string>
 
 </resources>

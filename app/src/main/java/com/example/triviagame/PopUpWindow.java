@@ -211,7 +211,7 @@ public class PopUpWindow extends Activity {
 
         user.setEmail(mUser.getEmail());
         user.setUserID(mUser.getUid());
-        user.setCoin("0");
+        user.setCoin(0);
         user.setHighScore(0);
 
         newUserRef.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {

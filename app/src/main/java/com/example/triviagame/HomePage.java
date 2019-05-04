@@ -1,10 +1,12 @@
 package com.example.triviagame;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ public class HomePage extends AppCompatActivity {
     private ConstraintLayout layout;
     //to exit the app this condition will be used
     private Boolean exitCondition = false;
+  private  MediaPlayer mp,mpSwoosh,mpBackground;
+
 
     private FirebaseAuth auth;
 
@@ -44,6 +49,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
         //setContentView(R.layout.top_menu_bar);
 
         setFullScreen();
@@ -57,7 +63,7 @@ public class HomePage extends AppCompatActivity {
 
         clickListner();
         changeBackground();
-
+        mpBackground.start();
     }
 
     public void checkUser(){
@@ -91,6 +97,7 @@ public class HomePage extends AppCompatActivity {
         btn_UserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mp.start();
                 startActivity(new Intent(getApplicationContext(), PopUpWindow.class));
             }
         });
@@ -98,7 +105,9 @@ public class HomePage extends AppCompatActivity {
         btn_GameStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CategoriesPage.class));
+               startActivity(new Intent(getApplicationContext(),CategoriesPage.class));
+                mp.start();
+              //mp.release();
                 finish();
             }
         });
@@ -106,6 +115,7 @@ public class HomePage extends AppCompatActivity {
         tv_LogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mp.start();
                 startActivity(new Intent(getApplicationContext(), LogInPage.class));
             }
         });
@@ -115,6 +125,7 @@ public class HomePage extends AppCompatActivity {
         tv_ChangeBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpSwoosh.start();
                 int backgroundNum = headerClassInstance.getCurBackground(getApplicationContext());
 
                 int temp = headerClassInstance.chnageBackground(backgroundNum, layout);
@@ -138,6 +149,9 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void assignVariables(){
+        mpBackground = MediaPlayer.create(this,R.raw.bensoundjazzyfrenchy);
+        mp = MediaPlayer.create(this,R.raw.btclick);
+        mpSwoosh = MediaPlayer.create(this,R.raw.swoosh);
         btn_GameStart = findViewById(R.id.btnGameStart);
         tv_LogIn = findViewById(R.id.tvLogIn);
         btn_BackHome = findViewById(R.id.btnBackToHome);

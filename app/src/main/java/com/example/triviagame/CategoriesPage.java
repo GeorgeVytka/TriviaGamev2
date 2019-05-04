@@ -2,6 +2,7 @@ package com.example.triviagame;
 
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ public class CategoriesPage extends AppCompatActivity {
     private Button btn_Continue, btn_BackHome, btn_UserInfo, btn_RandomQuestion;
 
     private ConstraintLayout layout;
+
+    private MediaPlayer mpRandom,mpCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class CategoriesPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mpRandom.start();
                 QuestionPage questionPage = new QuestionPage();
                 //this will set variable "RANDOM_QUESTION" = true in QuestionPage class
                 questionPage.setRandomQuestionTrue();
@@ -67,6 +71,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState1 = setTextState(textCategory1,categoryState1);
                 checkCategoryState();
             }
@@ -100,6 +105,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState2 = setTextState(textCategory2,categoryState2);
                 checkCategoryState();
             }
@@ -108,6 +114,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState3 = setTextState(textCategory3,categoryState3);
                 checkCategoryState();
             }
@@ -116,6 +123,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState4 = setTextState(textCategory4,categoryState4);
                 checkCategoryState();
             }
@@ -124,6 +132,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState5 = setTextState(textCategory5,categoryState5);
                 checkCategoryState();
             }
@@ -132,6 +141,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState6 = setTextState(textCategory6,categoryState6);
                 checkCategoryState();
             }
@@ -140,6 +150,7 @@ public class CategoriesPage extends AppCompatActivity {
         textCategory7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpCat.start();
                 categoryState7 = setTextState(textCategory7,categoryState7);
                 checkCategoryState();
             }
@@ -185,6 +196,8 @@ public class CategoriesPage extends AppCompatActivity {
 
     //this method will be called to assign buttons and text to variable
     private void assignValues(){
+        mpCat = MediaPlayer.create(this,R.raw.buttontoggle);
+        mpRandom = MediaPlayer.create(this,R.raw.btclick);
         textCategory1 = findViewById(R.id.tvCategory1);
         textCategory2 = findViewById(R.id.tvCategory2);
         textCategory3 = findViewById(R.id.tvCategory3);

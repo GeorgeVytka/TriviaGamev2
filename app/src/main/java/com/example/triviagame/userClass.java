@@ -11,24 +11,24 @@ public class userClass {
 
     private String Email;
     private @ServerTimestamp Date timestamp;
-    private String coin;
+    private int coin;
     private int highScore;
     private String userID;
-    private String documentID;
+   // private String documentID;
 
 
     public userClass(){
 
     }
 
-    public userClass(String email,Date timestamp, String coin, int highScore, String userID,String documentID){
+    public userClass(String email,Date timestamp, int coin, int highScore, String userID,String documentID){
 
         this.Email = email;
         this.timestamp = timestamp;
         this.coin = coin;
         this.highScore = highScore;
         this.userID = userID;
-        this.documentID = documentID;
+       // this.documentID = documentID;
 
     }
 
@@ -41,10 +41,10 @@ public class userClass {
 
 
 
-    public String getCoin(){
+    public int getCoin(){
         return coin;
     }
-    public void setCoin(String coin){
+    public void setCoin(int coin){
         this.coin = coin;
     }
 
@@ -63,8 +63,14 @@ public class userClass {
         this.userID = userID;
     }
 
-    public String getDocumentID(){return documentID;}
-    public void setDocumentID(){this.documentID = userID;}
+   // public String getDocumentID(){return documentID;}
+   // public void setDocumentID(){this.documentID = userID;}
 
     public Date getTimestamp(){return timestamp;}
+
+    public int calculateCoin(int tempCoin){
+
+
+        return coin;
+    }
 }

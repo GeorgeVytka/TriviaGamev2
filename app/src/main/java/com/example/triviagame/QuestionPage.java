@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
@@ -31,6 +32,7 @@ public class QuestionPage extends AppCompatActivity {
     private long timeLeftInMills = 60000;
     //will be used to return id answer was right or wrong
     boolean answerState;
+    private MediaPlayer mp,mpWrong;
 
 
     @Override
@@ -169,10 +171,12 @@ public class QuestionPage extends AppCompatActivity {
                 if (rightAnswer.equals(btn_Option1.getText().toString().trim())){
                     btn_Option1.setTextColor(Color.GREEN);
                     answerState = true;
+                    mp.start();
 
                 }else{
                     btn_Option1.setTextColor(Color.RED);
                     showRightAnswer();
+                    mpWrong.start();
                 }
             }
         });
@@ -183,10 +187,12 @@ public class QuestionPage extends AppCompatActivity {
                 if (rightAnswer.equals(btn_Option2.getText().toString().trim())){
                     btn_Option2.setTextColor(Color.GREEN);
                     answerState = true;
+                    mp.start();
 
                 }else{
                     btn_Option2.setTextColor(Color.RED);
                     showRightAnswer();
+                    mpWrong.start();
                 }
             }
         });
@@ -197,9 +203,11 @@ public class QuestionPage extends AppCompatActivity {
                 if (rightAnswer.equals(btn_Option3.getText().toString().trim())){
                     btn_Option3.setTextColor(Color.GREEN);
                     answerState = true;
+                    mp.start();
                 }else{
                     btn_Option3.setTextColor(Color.RED);
                     showRightAnswer();
+                    mpWrong.start();
                 }
             }
         });
@@ -210,10 +218,12 @@ public class QuestionPage extends AppCompatActivity {
                 if (rightAnswer.equals(btn_Option4.getText().toString().trim())){
                     btn_Option4.setTextColor(Color.GREEN);
                     answerState = true;
+                    mp.start();
 
                 }else{
                     btn_Option4.setTextColor(Color.RED);
                     showRightAnswer();
+                    mpWrong.start();
                 }
             }
         });
@@ -265,6 +275,8 @@ public class QuestionPage extends AppCompatActivity {
     }
 
     public void assignValues(){
+        mpWrong = MediaPlayer.create(this,R.raw.wronganswer);
+        mp = MediaPlayer.create(this,R.raw.correct);
         tv_Question = findViewById(R.id.tvQuestion);
         tv_Timer = findViewById(R.id.tvTimer);
         tv_Category = findViewById(R.id.tvCategory);
