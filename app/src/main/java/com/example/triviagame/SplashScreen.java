@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 public class SplashScreen extends AppCompatActivity {
     private ConstraintLayout layout;
+
+    // begin of added . added 5/04/2019
     private boolean mIsBound = false;
     private MusicService mServ;
     private ServiceConnection Scon =new ServiceConnection(){
@@ -43,6 +45,8 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
+    //end of added
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,7 @@ public class SplashScreen extends AppCompatActivity {
         LogoLauncher logoLauncher=new LogoLauncher();
         logoLauncher.start();
 
+
         layout = findViewById(R.id.constraintLayout);
         HeaderClass headerClassInstance = new HeaderClass();
         headerClassInstance.setBackground(layout, getApplicationContext());
@@ -70,6 +75,8 @@ public class SplashScreen extends AppCompatActivity {
         startService(music);
     }
 
+
+    //added 5/04/2019
     @Override
     protected void onResume() {
         super.onResume();
@@ -80,6 +87,7 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
+    //added 5/04/2019
     @Override
     protected void onDestroy() {
         super.onDestroy();

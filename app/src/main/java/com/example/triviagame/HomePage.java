@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
@@ -31,6 +32,8 @@ import java.util.prefs.PreferenceChangeEvent;
 
 public class HomePage extends AppCompatActivity {
 
+    //use this to stop music
+    HomePage mHomeWatcher;
     //variables to assign the button or text that user see on screen
     //NOTE: btn is for Button, tv for TextView
     private Button btn_GameStart, btn_BackHome, btn_UserInfo;
@@ -161,6 +164,26 @@ public class HomePage extends AppCompatActivity {
         tv_GameName = findViewById(R.id.tvGameName);
     }
 
+
+/*
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        PowerManager pm = (PowerManager)
+                getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = false;
+        if (pm != null) {
+            isScreenOn = pm.isScreenOn();
+        }
+
+        if (!isScreenOn) {
+            if (mServ != null) {
+                mServ.pauseMusic();
+            }
+        }
+
+    }*/
     @Override
     public void onBackPressed() {
         if (exitCondition){

@@ -1,3 +1,15 @@
+/*
+*This Class
+* use services to play background music in all activities without
+* restarting it everytime when activity starts!
+*
+*
+*
+* */
+
+
+
+
 package com.example.triviagame;
 
 import android.app.Service;
